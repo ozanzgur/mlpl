@@ -9,7 +9,7 @@ Using this library, you can:
 - Automatically try different processing steps and use useful ones. (imputations, binning, one-hot encoding, ...)
 - Make your predictions more reliable by averaging results obtained from different CV splits and random seeds.
 
-###Start a new pipeline
+### Start a new pipeline
 ***
 A pipeline consists of  a class and its config and log files.
 A pipeline will save your baseline model and the data after the baseline.
@@ -50,7 +50,7 @@ lr_pipeline = pipe.Pipeline(label_name = label_name,
 ```
 
 
-###Hyperparameter search using hyperopt
+### Hyperparameter search using hyperopt
 ***
 - Specify hyperameter search space for each model.
 
@@ -100,7 +100,7 @@ lr_pipeline.set_baseline_step(model = pmodels.train_sklearn_pipeline,
                                )
 ```
 
-###Run baseline step
+### Run baseline step
 ***
 ```python
 res = lr_pipeline.run_baseline(return_result = True)
