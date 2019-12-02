@@ -4,10 +4,15 @@ A machine learning pipeline to speed up data science lifecycle.
 
 Using this library, you can:
 - Test new experiments easily and keep track of their results.
-- Do different hyperparameter search.
+- Do hyperparameter search. (Bayesian search, quick linear search)
 - Create a pipeline that consists of useful steps and save/load it.
 - Automatically try different processing steps and use useful ones. (imputations, binning, one-hot encoding, ...)
 - Make your predictions more reliable by averaging results obtained from different CV splits and random seeds.
+
+#### Install:
+```
+pip install mlpl
+```
 
 ### Start a new pipeline
 ***
@@ -34,19 +39,19 @@ test_path = 'data/test.csv'
 
 # Pipeline class will keep track of your processed files, model metrics and experiments. 
 lr_pipeline = pipe.Pipeline(label_name = label_name,
-                            			   overwrite = True,
-                            			   project_path = 'lr_pipeline',
-                            			   train_data_path = trn_path,
-                            			   test_data_path = test_path,
-                            			   minimize_metric = False,
-                            			   useful_limit = 0.001,
-                            			   line_search_iter = 1,
-                            			   n_random_seeds = 1,
-                            			   bayesian_search_iter= 50,
-                            			   bayesian_search_count = 1,
-                            			   final_bayesian_search_iter = 0,
-                            			   line_search_patience = 2,
-                            			   line_search_params = {'C': (1e-7, 1e3)})
+                               overwrite = True,
+                               project_path = 'lr_pipeline',
+                               train_data_path = trn_path,
+                               test_data_path = test_path,
+                               minimize_metric = False,
+                               useful_limit = 0.001,
+                               line_search_iter = 1,
+                               n_random_seeds = 1,
+                               bayesian_search_iter= 50,
+                               bayesian_search_count = 1,
+                               final_bayesian_search_iter = 0,
+                               line_search_patience = 2,
+                               line_search_params = {'C': (1e-7, 1e3)})
 ```
 
 
@@ -87,7 +92,7 @@ By  specifying multiple sklearn folds objects, average predictions over differen
                  KFold(n_splits= 5, shuffle = True, random_state = 100)]
 ```
 
-** Creating a baseline model **
+**Creating a baseline model**
 ***
 A baseline step is a step with minimal processing. Preprocessing steps and feature engineering steps in the project will be tested against the metrics of baseline model.
 
@@ -125,7 +130,7 @@ res = lr_pipeline.run_baseline(return_result = True)
 
 # Since this competition requires values to be 0 or 1,
 # We have to adjust a decision threshold. While selecting this threshold,
-# criteria is to make mean value of test_preds to label in training set.
+# criteria is to make mean(label) equal to mean(predictions)
 # This step is not necessary in most projects
 test_preds = (res['test_preds'] > 0.55).astype('int')
 
