@@ -46,7 +46,7 @@ nbconvert==5.6.1
 nbformat==4.4.0
 networkx==2.4
 notebook==6.0.2
-numpy==1.17.3
+numpy==1.22.0
 opt-einsum==3.1.0
 pandas==0.25.2
 pandocfilters==1.4.2
